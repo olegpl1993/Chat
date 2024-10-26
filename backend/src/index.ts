@@ -1,14 +1,14 @@
-import cors from 'cors';
-import express from 'express';
-import { Console } from './modules/console.module';
+import cors from "cors";
+import express from "express";
+import { Console } from "./modules/console.module";
 
-const PORT = 5555;
+const PORT = 4000;
 const app = express();
 app.use(cors());
 
-app.get('/', async (req, res) => {
+app.get("/", async (req, res) => {
   try {
-    res.setHeader('Content-Type', 'text/html');
+    res.setHeader("Content-Type", "text/html");
     res.send(`
       <!DOCTYPE html>
       <html>
@@ -26,7 +26,21 @@ app.get('/', async (req, res) => {
   }
 });
 
+app.get("/test", async (req, res) => {
+  try {
+    res.setHeader("Content-Type", "application/json");
+    res.send(
+      JSON.stringify({
+        message: "Hello from Backend",
+      })
+    );
+  } catch (error) {
+    res.status(500);
+    res.end(`Error: ${error}`);
+  }
+});
+
 app.listen(PORT, () => {
-  console.log(`Proxy server start on port: ${PORT}`);
+  console.log(`Server start on: localhost:${PORT}`);
   Console();
 });
