@@ -1,46 +1,52 @@
 import cors from "cors";
 import express from "express";
-import { Console } from "./modules/console.module";
+import { createServer } from "node:http";
+import { Server } from "socket.io";
+import chatRoute from "./router/chatRoute";
+import mainRoute from "./router/mainRoute";
+import testRoute from "./router/testRoute";
 
 const PORT = 4000;
 const app = express();
 app.use(cors());
 
-app.get("/", async (req, res) => {
-  try {
-    res.setHeader("Content-Type", "text/html");
-    res.send(`
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>Hello from Backend</title>
-        </head>
-        <body>
-          <h1>Hello from Backend</h1>
-        </body>
-      </html>
-    `);
-  } catch (error) {
-    res.status(500);
-    res.end(`Error: ${error}`);
-  }
+// Routes
+app.use("/", mainRoute);
+app.use("/test", testRoute);
+app.use("/chat", chatRoute);
+app.use((_, res) => {
+  res.status(404).json({ message: "Route not found" });
 });
 
-app.get("/test", async (req, res) => {
-  try {
-    res.setHeader("Content-Type", "application/json");
-    res.send(
-      JSON.stringify({
-        message: "Hello from Backend",
-      })
-    );
-  } catch (error) {
-    res.status(500);
-    res.end(`Error: ${error}`);
-  }
+// HTTP Server
+const server = createServer(app);
+server.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server start on: localhost:${PORT}`);
-  Console();
+// Setup Socket.IO
+const io = new Server(server, {
+  cors: {
+    origin: ["https://chat.marker.cx.ua", "http://localhost:5173"],
+  },
+});
+
+// WebSocket Events
+io.on("connection", (socket) => {
+  console.log(`User connected with id: ${socket.id}`);
+
+  socket.on("ping", () => {
+    console.log("Ping received from client");
+    socket.emit("pong");
+  });
+
+  socket.on("chat message", (msg, callback) => {
+    console.log("Message received:", msg);
+    io.emit("chat message", { name: "User", message: msg });
+    callback();
+  });
+
+  socket.on("disconnect", () => {
+    console.log(`User disconnected: ${socket.id}`);
+  });
 });
