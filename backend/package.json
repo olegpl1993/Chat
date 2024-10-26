@@ -1,23 +1,26 @@
 {
-  "name": "crud-api",
+  "name": "chat-api",
   "version": "1.0.0",
-  "description": "CRUD-API",
-  "main": "index.js",
+  "description": "CHAT-API",
+  "main": "index.ts",
+  "type": "module",
   "scripts": {
     "build": "tsc",
-    "start:dev": "cross-env NODE_ENV=development tsx src/server.ts",
-    "start:prod": "tsc && cross-env NODE_ENV=production node dist/src/server.js"
+    "dev": "tsx watch src/index.ts",
+    "prod": "node dist/index.js"
   },
   "author": "MarkerOK",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
-    "nodemon": "^2.0.22",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.1.5"
+    "express": "^4.21.1"
+
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
     "@types/node": "^20.3.2",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
@@ -26,6 +29,7 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.8",
-    "ts-loader": "^9.4.4"
+    "typescript": "^5.1.5",
+    "tsx": "^4.19.1"
   }
 }
