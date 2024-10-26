@@ -1,8 +1,6 @@
 {
   "name": "chat-api",
   "version": "1.0.0",
-  "description": "CHAT-API",
-  "main": "index.ts",
   "type": "module",
   "scripts": {
     "build": "tsc",
