@@ -4,7 +4,6 @@ import { createServer } from "node:http";
 import { Server } from "socket.io";
 import chatRoute from "./router/chatRoute";
 import mainRoute from "./router/mainRoute";
-import testRoute from "./router/testRoute";
 
 const PORT = 4000;
 const app = express();
@@ -12,7 +11,6 @@ app.use(cors());
 
 // Routes
 app.use("/", mainRoute);
-app.use("/test", testRoute);
 app.use("/chat", chatRoute);
 app.use((_, res) => {
   res.status(404).json({ message: "Route not found" });
@@ -41,8 +39,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("chat message", (msg, callback) => {
-    console.log("Message received:", msg);
-    io.emit("chat message", { name: "User", message: msg });
+    const { name, message } = msg;
+    console.log(`Message from ${name}: ${message}`);
+
+    socket.broadcast.emit("chat message", { name, message });
     callback();
   });
 

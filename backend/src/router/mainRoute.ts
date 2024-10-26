@@ -9,10 +9,13 @@ mainRoute.get("/", (_, res) => {
       <!DOCTYPE html>
       <html>
         <head>
-          <title>Hello from Backend</title>
+          <title>Open Chat</title>
         </head>
         <body>
-          <h1 style="text-align: center;">Hello from Backend</h1>
+        <div style="text-align: center;">
+          <h1>Open Chat</h1>
+          <button onclick="window.location.href='/chat'">Go to Chat</button>
+        </div>
         </body>
       </html>
     `);
