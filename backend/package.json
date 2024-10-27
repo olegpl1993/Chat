@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rmdir /s /q dist && tsc && copy .htaccess dist && copy package.json dist",
     "dev": "tsx watch src/index.ts",
-    "start": "tsx dist/index.js"
+    "prod": "node dist/index.js",
+    "start": "node index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
