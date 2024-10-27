@@ -5,7 +5,7 @@ import { Server } from "socket.io";
 import chatRoute from "./router/chatRoute";
 import mainRoute from "./router/mainRoute";
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 const app = express();
 app.use(cors());
 
