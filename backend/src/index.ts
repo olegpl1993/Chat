@@ -2,8 +2,8 @@ import cors from "cors";
 import express from "express";
 import { createServer } from "node:http";
 import { Server } from "socket.io";
-import mainRoute from "./router/mainRoute.js";
 import chatRoute from "./router/chatRoute.js";
+import mainRoute from "./router/mainRoute.js";
 
 const PORT = process.env.PORT || 4000;
 const app = express();
