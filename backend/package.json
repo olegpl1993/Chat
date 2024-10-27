@@ -1,12 +1,13 @@
 {
   "name": "chat-api",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "rmdir /s /q dist && tsc && copy .htaccess dist && copy package.json dist",
     "dev": "tsx watch src/index.ts",
-    "prod": "node dist/index.js"
+    "prod": "node dist/index.js",
+    "start": "node index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
