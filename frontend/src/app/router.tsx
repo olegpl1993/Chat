@@ -5,8 +5,8 @@ export const router = createBrowserRouter([
   {
     path: "/",
     lazy: async () => {
-      const { Main } = await import("../pages/Main/Main");
-      return { Component: Main };
+      const { Home } = await import("../pages/Home/Home");
+      return { Component: Home };
     },
     errorElement: <ErrorPage />,
   },
