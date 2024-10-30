@@ -7,11 +7,29 @@
   width: 100%;
 }
 
-.contant {
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  gap: 20px;
+}
+
+.inputBox {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
+  gap: 10px;
+}
+
+.messageBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
 }

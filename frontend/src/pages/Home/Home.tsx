@@ -6,7 +6,8 @@ export function Home() {
   return (
     <div className={styles.container}>
       <Header />
-      <div className={styles.contant}>
+
+      <div className={styles.content}>
         <h1 className={styles.title}>Home Page</h1>
         <Link to="/chat">Go to Chat</Link>
       </div>
